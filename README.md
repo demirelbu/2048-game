@@ -1,10 +1,8 @@
 # 2048 Video Game
 
-2048 video game
-
 
 ```python
-from Game2048 import GameEnv
+from environment.Game2048 import GameEnv
 
 env = GameEnv()
 observation, action, reward, done = env.reset(), None, 0.0, False
@@ -20,7 +18,7 @@ while not done:
 
 ```python
 from time import sleep
-from Game2048 import GameEnv
+from environment.Game2048 import GameEnv
 
 env = GameEnv()
 env.render.start()
