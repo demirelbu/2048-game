@@ -5,10 +5,7 @@ from Game2048 import GameEnv
 def main():
     env = GameEnv()
     env.render.start()
-    observation = env.reset()
-    action = None
-    reward = 0.0
-    done = False
+    observation, action, reward, done = env.reset(), None, 0.0, False
     k = 0
     print("#move: {}, obs: {}, action: {}, reward: {}, score: {}, done: {}".format(k, observation, action, reward, env.score, done))
     while not done:
