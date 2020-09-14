@@ -6,49 +6,48 @@ import gym
 from gym.spaces import Discrete, Box
 from gym.utils import seeding
 
-"""
-    2048 (video game, implemented by using numpy)
-
-    Description:
-        2048 is a single-player sliding block puzzle game; see https://en.wikipedia.org/wiki/2048_(video_game).
-        The goal of the game is to slide numbered tiles on a 4x4 grid to combine them to creat a tile with the
-        number 2048. The game is played on a gray 4x4 grid, with numbered tiles that slide when a player moves
-        them using the four arrow keys. Every turn, a new tile will randomly appear in an empty spot on the board
-        with a value of either 2 or 4. Tiles slide as far as possible in the chosen direction until they are stopped
-        by either another tile or the edge of the grid. If two tiles of the same number collide while moving, they
-        will merge into a tile with the total value of the two tiles that collided. The resulting tile cannot merge
-        with another tile again in the same move.
-
-    Source:
-        A version of this code with some errors can be found in https://www.youtube.com/watch?v=b4XP2IcI-Bg.
-
-    Observation:
-        Type: Box(low=0, high=2048, shape=(16,), type=np.uint8)
-              Observation (i.e., flatten 4x4 matrix, which describes the current board state)
-        e.g., [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
-
-    Actions:
-        Type: Discrete(4)
-        Num   Action
-        0     Move tiles placed on 4x4 grid to the left
-        1     Move tiles placed on 4x4 grid to the right
-        2     Move tiles placed on 4x4 grid to the up
-        3     Move tiles placed on 4x4 grid to the down
-
-    Reward:
-        Reward is 1 if a tile with the number 2048 is formed; otherwise, reward is 0.
-
-    Starting State:
-        A board (gray 4x4 grid) consists of two randomly placed tiles with the number 2.
-
-    Episode Termination:
-        There is either a tile with the number 2048 on the board or no empty spot to place a tile on the board.
-"""
-
 
 class GameEnv(object):
+    """
+        2048 (video game, implemented by using numpy)
+
+        Description:
+            2048 is a single-player sliding block puzzle game; see https://en.wikipedia.org/wiki/2048_(video_game).
+            The goal of the game is to slide numbered tiles on a 4x4 grid to combine them to creat a tile with the
+            number 2048. The game is played on a gray 4x4 grid, with numbered tiles that slide when a player moves
+            them using the four arrow keys. Every turn, a new tile will randomly appear in an empty spot on the board
+            with a value of either 2 or 4. Tiles slide as far as possible in the chosen direction until they are stopped
+            by either another tile or the edge of the grid. If two tiles of the same number collide while moving, they
+            will merge into a tile with the total value of the two tiles that collided. The resulting tile cannot merge
+            with another tile again in the same move.
+
+        Source:
+            A version of this code with some errors can be found in https://www.youtube.com/watch?v=b4XP2IcI-Bg.
+
+        Observation:
+            Type: Box(low=0, high=2048, shape=(16,), type=np.uint8)
+                Observation (i.e., flatten 4x4 matrix, which describes the current board state)
+            e.g., [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
+
+        Actions:
+            Type: Discrete(4)
+            Num   Action
+            0     Move tiles placed on 4x4 grid to the left
+            1     Move tiles placed on 4x4 grid to the right
+            2     Move tiles placed on 4x4 grid to the up
+            3     Move tiles placed on 4x4 grid to the down
+
+        Reward:
+            Reward is 1 if a tile with the number 2048 is formed; otherwise, reward is 0.
+
+        Starting State:
+            A board (gray 4x4 grid) consists of two randomly placed tiles with the number 2.
+
+        Episode Termination:
+            There is either a tile with the number 2048 on the board or no empty spot to place a tile on the board.
+    """
     def __init__(self):
-        # instantiating the render class
+        # instantiate the render class
         self.render = self._render(self)
         # create different probability distributions and set a seed
         self.seed()
