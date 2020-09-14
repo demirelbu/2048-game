@@ -14,7 +14,7 @@ class Game2048:
         self.action_space = self.env.action_space
         self.observation_space = Dict({
             "obs": self.env.observation_space,
-            "action_mask": Box(low=self.action_space.low, high=self.action_space.high, shape=(self.action_space.n,), dtype=np.uint8)
+            "action_mask": Box(low=0, high=1, shape=(self.action_space.n,), dtype=np.uint8)
         })
         self.running_reward = 0.0
 
