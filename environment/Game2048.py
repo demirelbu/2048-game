@@ -53,7 +53,7 @@ class GameEnv(object):
         self.seed()
         # start a new game
         self.start_game()
-
+        # define action and observation spaces
         self.action_space = Discrete(4)
         self.observation_space = Box(low=0, high=2048, shape=(16,), dtype=np.uint8)
 
