@@ -25,7 +25,7 @@ class GameEnv(object):
             A version of this code with some errors can be found in https://www.youtube.com/watch?v=b4XP2IcI-Bg.
 
         Observation:
-            Type: Box(low=0, high=2048, shape=(16,), type=np.uint8)
+            Type: Box(low=0, high=2048, shape=(16,), type=np.int64)
                 Observation (i.e., flatten 4x4 matrix, which describes the current board state)
             e.g., [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
 
@@ -55,7 +55,7 @@ class GameEnv(object):
         self.start_game()
         # define action and observation spaces
         self.action_space = Discrete(4)
-        self.observation_space = Box(low=0, high=2048, shape=(16,), dtype=np.uint8)
+        self.observation_space = Box(low=0, high=2048, shape=(16,), dtype=np.int64)
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -64,14 +64,14 @@ class GameEnv(object):
     def start_game(self) -> None:
         """Initialize the game."""
         # create matrix of zeros
-        self.state = np.zeros((4, 4), dtype=np.uint8)
+        self.state = np.zeros((4, 4), dtype=np.int64)
         # pick random coordinates
-        row, col = self.np_random.randint(low=0, high=4, size=2, dtype=np.uint8)
+        row, col = self.np_random.randint(low=0, high=4, size=2, dtype=np.int64)
         # place the first tile on the board
         self.state[row, col] = 2
         # pick random coordinates
         while(self.state[row, col] != 0):
-            row, col = self.np_random.randint(low=0, high=4, size=2, dtype=np.uint8)
+            row, col = self.np_random.randint(low=0, high=4, size=2, dtype=np.int64)
         # place the second tile on the board
         self.state[row, col] = 2
         # initialize the score
@@ -79,7 +79,7 @@ class GameEnv(object):
 
     def stack(self) -> None:
         # create matrix of zeros
-        new_state = np.zeros((4, 4), dtype=np.uint8)
+        new_state = np.zeros((4, 4), dtype=np.int64)
         for i in range(4):
             k = 0
             for j in range(4):
@@ -98,10 +98,10 @@ class GameEnv(object):
                     self.score += self.state[i, j]
 
     def reverse(self) -> None:
-        new_state = np.zeros((4, 4), dtype=np.uint8)
+        new_state = np.zeros((4, 4), dtype=np.int64)
         for i in range(4):
             for j in range(4):
-                new_state[i, j] = self.state[i][3 - j]
+                new_state[i, j] = self.state[i, 3 - j]
         self.state = new_state
 
     def transpose(self) -> None:
@@ -112,10 +112,10 @@ class GameEnv(object):
         """Add a new 2 or 4 tile randomly to an empty cell."""
         if any(0 in row for row in self.state):
             row, col = self.np_random.randint(
-                low=0, high=4, size=2, dtype=np.uint8)
+                low=0, high=4, size=2, dtype=np.int64)
             while(self.state[row, col] != 0):
                 row, col = self.np_random.randint(
-                    low=0, high=4, size=2, dtype=np.uint8)
+                    low=0, high=4, size=2, dtype=np.int64)
             self.state[row, col] = self.np_random.choice([2, 4])
 
     def left_move_exists(self) -> bool:
