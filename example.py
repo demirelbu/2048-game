@@ -1,4 +1,4 @@
-from environment.Game2048 import GameEnv
+from environments.Game2048 import GameEnv
 
 
 def main():
