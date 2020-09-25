@@ -5,7 +5,7 @@
 To play 2048 Video Game by using a random strategy, run the code shown below:
 
 ```python
-from environment.Game2048 import GameEnv
+from environments.Game2048 import GameEnv
 
 env = GameEnv()
 observation, action, reward, done = env.reset(), None, 0.0, False
@@ -22,7 +22,7 @@ To play 2048 Video Game with graphical interface by using a random strategy, run
 
 ```python
 from time import sleep
-from environment.Game2048 import GameEnv
+from environments.Game2048 import GameEnv
 
 env = GameEnv()
 env.render.start()
